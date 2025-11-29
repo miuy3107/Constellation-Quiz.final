@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kết quả — Constellation Quiz</title>
+
+<style>
+body{
+  margin:0;
+  min-height:100vh;
+  background: linear-gradient(180deg, #3a2e4d 0%, #2f2440 100%);
+  color: #fff;
+  font-family: Arial, sans-serif;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:24px;
+}
+
+h1{
+  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:36px;
+  margin-bottom:16px;
+}
+
+h2{
+  font-size:24px;
+  margin-bottom:12px;
+  color:#ffd6e8;
+}
+
+p{
+  font-size:16px;
+  max-width:600px;
+  line-height:1.5;
+  margin-bottom:20px;
+}
+
+footer{
+  position: fixed;
+  bottom: 12px;
+  width: 100%;
+  text-align: center;
+  color: rgba(255,214,232,0.85);
+  font-size: 14px;
+}
+</style>
+</head>
+<body>
+
+<h1>Kết quả của bạn</h1>
+<h2 id="assigned-constellation">...</h2>
+<p id="personality-text">...</p>
+
+<button onclick="restartQuiz()" style="padding:12px 20px; font-size:16px; border-radius:12px; border:none; background:#6b4e71; color:#ffd6e8; cursor:pointer;">Chơi lại</button>
+
+<footer>© miuy3107</footer>
+
+<script>
+// Lấy điểm trait từ localStorage
+const raw = localStorage.getItem('quizScores');
+const scores = raw ? JSON.parse(raw) : {traitA:0, traitB:0, traitC:0};
+
+// Tìm trait cao nhất
+const maxTrait = Object.keys(scores).reduce((a,b)=> scores[a]>=scores[b]?a:b,'traitA');
+
+// Gán chòm sao + personality theo trait
+const CONSTELLATION_MAP = {
+  traitA: { // tò mò, mơ mộng, mở rộng tầm nhìn
+    name: 'Orion',
+    personality: 'Khám phá, mơ mộng, thích phiêu lưu và thử thách bản thân.'
+  },
+  traitB: { // thực tế, logic, tập trung vào bằng chứng
+    name: 'Ursa Major',
+    personality: 'Thực tế, logic, đáng tin cậy, luôn dựa trên dữ liệu và kinh nghiệm.'
+  },
+  traitC: { // khách quan, thận trọng, sẵn sàng khám phá khi có dữ liệu
+    name: 'Cassiopeia',
+    personality: 'Khách quan, thận trọng, luôn phân tích tình huống trước khi hành động, nhưng vẫn sẵn sàng học hỏi và khám phá.'
+  }
+};
+
+const result = CONSTELLATION_MAP[maxTrait] || {name:'?', personality:'?'};
+
+document.getElementById('assigned-constellation').textContent = result.name;
+document.getElementById('personality-text').textContent = result.personality;
+
+// Hàm chơi lại
+function restartQuiz(){
+  localStorage.removeItem('quizScores');
+  window.location.href='index.html'; // đổi tên file câu 1 nếu khác
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Câu 1 — Constellation Quiz</title>
+
+<!-- Fonts: title = Helvetica, body = Arial -->
+<style>
+  :root{
+    --bg:#3a2e4d;
+    --card: rgba(255,214,232,0.08);
+    --accent:#ffd6e8;
+    --accent-2:#6b4e71;
+  }
+
+  /* body + default font = Arial */
+  body{
+    margin:0;
+    min-height:100vh;
+    background: linear-gradient(180deg, #3a2e4d 0%, #2f2440 100%);
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+
+  /* HEADER / TITLE uses Helvetica */
+  header h1{
+    margin-top:80px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:34px;
+    letter-spacing:0.6px;
+    color: #fff;
+  }
+
+  .subtitle{
+    font-style:italic;
+    margin-top:8px;
+    color: rgba(255,214,232,0.9);
+    font-size:16px;
+  }
+
+  /* Card with question */
+  .card{
+    margin-top:30px;
+    width: min(820px, 92%);
+    background: var(--card);
+    border: 1px solid rgba(255,214,232,0.12);
+    border-radius:18px;
+    padding:24px;
+    box-shadow: 0 10px 30px rgba(107,78,113,0.08);
+    backdrop-filter: blur(6px);
+  }
+
+  .question{
+    font-size:18px;
+    margin-bottom:14px;
+  }
+
+  .answers{
+    display:flex;
+    gap:12px;
+    flex-direction:column;
+  }
+
+  .ans-btn{
+    text-align:left;
+    padding:14px 18px;
+    border-radius:12px;
+    border: 2px solid rgba(247,189,226,0.3); 
+    background: linear-gradient(180deg, rgba(255,214,232,0.15), rgba(255,214,232,0.12));
+    color: #2e1342; 
+    font-weight:600;
+    font-size:14px;
+    transition: all 0.2s ease;
+    }
+
+    .ans-btn:hover{
+    background: linear-gradient(180deg, rgba(255,214,232,0.35), rgba(255,214,232,0.25));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(107,78,113,0.2);
+    }
+
+
+
+  .ans-btn:disabled{
+    opacity:0.56;
+    cursor:default;
+    transform:none;
+    box-shadow:none;
+  }
+
+  .helper{
+    margin-top:10px;
+    font-size:13px;
+    color: rgba(255,214,232,0.8);
+  }
+
+  /* Funfact panel - slide in from right */
+  .funfact-panel{
+    position: fixed;
+    right: -420px; /* start off-screen to right */
+    top: 18%;
+    width: 380px;
+    max-width: 86%;
+    background: linear-gradient(180deg, rgba(255,214,232,0.95), rgba(255,214,232,0.9));
+    color: #3a2e4d;
+    border-radius: 14px;
+    padding:16px 18px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    transform: translateX(0);
+    transition: right 0.6s cubic-bezier(.2,.9,.2,1), opacity 0.4s ease;
+    opacity:0;
+    z-index: 60;
+  }
+
+  .funfact-panel.show{
+    right: 18px;     /* slide into view */
+    opacity:1;
+  }
+
+  .funfact-panel h3{
+    margin:0 0 8px 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size:16px;
+  }
+
+  .funfact-panel p{
+    margin:0 0 12px 0;
+    font-size:13px;
+  }
+
+  .funfact-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:8px;
+  }
+
+  .next-btn{
+    padding:10px 14px;
+    border-radius:10px;
+    background: #6b4e71;
+    color: #ffd6e8;
+    border: none;
+    cursor:pointer;
+    font-weight:700;
+  }
+
+  .next-btn:disabled{
+    opacity:0.6;
+    cursor:default;
+  }
+
+  /* footer credit fixed */
+  footer{
+    position: fixed;
+    bottom: 8px;
+    width:100%;
+    text-align:center;
+    color: rgba(255,214,232,0.85);
+    font-size:13px;
+    font-family: Arial, sans-serif;
+    pointer-events:none;
+  }
+
+  footer .credit{
+    display:inline-block;
+    pointer-events:auto;
+    background: rgba(255,214,232,0.04);
+    padding:6px 10px;
+    border-radius:12px;
+    border:1px solid rgba(255,214,232,0.08);
+  }
+
+  /* small responsive tweak */
+  @media (max-width:600px){
+    header h1{ font-size:22px; margin-top:36px; }
+    .card{ padding:16px; }
+    .funfact-panel{ top: 12%; left: 6%; right: 6%; width:auto; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1> Câu 1. </h1>
+  <div class="subtitle">Bạn bị phán quyết tử hình vì tuyên bố Mặt Trời đứng yên — bạn sẽ làm gì?</div>
+</header>
+<style>
+  .zoom {
+    transition: transform 0.3s;
+  }
+  .zoom:hover {
+    transform: scale(1.2); /* 1.2 = phóng to 20% */
+  }
+</style>
+
+<img src="nền1.png" class="zoom" width="500">
+
+
+<main class="card" role="main" aria-labelledby="qtitle" style="margin-top: -40px;">
+
+  <div class="answers" aria-describedby="helper">
+    <button class="ans-btn" data-trait="traitB" id="opt1">
+      ① Nhượng bộ, đưa ra tuyên bố ngược lại để sống.
+    </button>
+
+    <button class="ans-btn" data-trait="traitA" id="opt2">
+      ② Chấp nhận phán quyết, giữ vững lập trường.
+    </button>
+
+    <button class="ans-btn" data-trait="traitC" id="opt3">
+      ③ Cố gắng thuyết phục mọi người tin vào thuyết của mình.
+    </button>
+  </div>
+
+</main>
+
+<!-- Funfact panel (ẩn mặc định) -->
+<aside id="funfact" class="funfact-panel" role="dialog" aria-modal="true" aria-hidden="true">
+  <h3>Funfact: Galileo và thuyết nhật tâm</h3>
+  <p id="funfact-text">
+    <!-- Nội dung sẽ được cập nhật bằng JS -->
+  </p>
+
+  <div class="funfact-footer">
+    <small style="font-size:12px">Bạn đã chọn: <span id="chosen-label" style="font-weight:700"></span></small>
+    <div>
+      <button id="close-fact" class="next-btn" style="background:#9e6f9b; margin-right:8px">Đóng</button>
+      <button id="go-next" class="next-btn">Tiếp câu →</button>
+    </div>
+  </div>
+</aside>
+
+<footer style="
+    position: fixed;
+    bottom: 12px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    font-family: Sanrif, sans-serif;
+    opacity: 0.7;
+">
+    © miuy3107
+</footer>
+
+<script>
+/*
+  Logic:
+  - Mỗi nút có data-trait: traitA, traitB, traitC
+  - Khi chọn: cập nhật localStorage 'quizScores' object (keeps counts)
+  - Hiển thị funfact panel với nội dung tương ứng
+  - Disable các nút để tránh chọn nhiều lần
+  - 'Tiếp câu' đưa tới page2.html (thay đổi đường dẫn khi bạn đặt tên)
+*/
+
+(function(){
+  // ensure stored object exists
+  function getScores(){
+    const raw = localStorage.getItem('quizScores');
+    if(!raw) {
+      const init = { traitA:0, traitB:0, traitC:0 };
+      localStorage.setItem('quizScores', JSON.stringify(init));
+      return init;
+    }
+    try { return JSON.parse(raw); } catch(e){ return { traitA:0, traitB:0, traitC:0 }; }
+  }
+
+  function saveScores(obj){
+    localStorage.setItem('quizScores', JSON.stringify(obj));
+  }
+
+  const answers = document.querySelectorAll('.ans-btn');
+  const panel = document.getElementById('funfact');
+  const funfactText = document.getElementById('funfact-text');
+  const chosenLabel = document.getElementById('chosen-label');
+  const closeBtn = document.getElementById('close-fact');
+  const goNext = document.getElementById('go-next');
+
+  // Funfacts per question/choice
+  const FUNFACTS = {
+    opt1: {
+      label: 'Nhượng bộ để sống',
+      text: 'Trong lịch sử, nhiều nhà khoa học lựa chọn suy nghĩ thận trọng trong bối cảnh áp lực chính quyền — nhưng Galileo ban đầu vẫn bảo vệ các quan sát của mình. Năm 1633 Galileo bị đưa ra toà vì ủng hộ hệ nhật tâm và bị buộc phải từ bỏ quan điểm này trước công chúng.'
+    },
+    opt2: {
+      label: 'Giữ vững lập trường',
+      text: 'Galileo quả thực kiên định với các quan sát thiên văn của ông — mặc dù bị buộc phải rút lại lời công khai, di sản khoa học của ông (như việc ủng hộ hệ thống nhật tâm) đã ảnh hưởng mạnh mẽ tới khoa học hiện đại.'
+    },
+    opt3: {
+      label: 'Cố gắng thuyết phục',
+      text: 'Galileo đã viết nhiều tác phẩm để trình bày lý luận và quan sát — như "Dialogue Concerning the Two Chief World Systems" — nhằm thuyết phục công chúng và giới trí thức về thuyết nhật tâm, dù điều đó khiến ông gặp rắc rối với Giáo hội.'
+    }
+  };
+
+  // When an answer is clicked
+  answers.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // disable all buttons
+      answers.forEach(b => b.disabled = true);
+
+      const trait = btn.dataset.trait; // traitA/B/C
+      const optId = btn.id; // opt1/opt2/opt3
+      const scores = getScores();
+      scores[trait] = (scores[trait] || 0) + 1;
+      saveScores(scores);
+
+      // update funfact content
+      const f = FUNFACTS[optId] || { label: '...', text: '...' };
+      chosenLabel.textContent = f.label;
+      funfactText.textContent = f.text;
+
+      // show panel
+      panel.classList.add('show');
+      panel.setAttribute('aria-hidden', 'false');
+
+      // optional: subtle vibration on supported devices
+      if(navigator.vibrate) navigator.vibrate(40);
+    });
+  });
+
+  // Close funfact (just hide; keep buttons disabled)
+  closeBtn.addEventListener('click', () => {
+    panel.classList.remove('show');
+    panel.setAttribute('aria-hidden', 'true');
+  });
+
+  // Go to next page (change path if your next file is named differently)
+  goNext.addEventListener('click', () => {
+    // play fade-out effect for smoothness
+    document.body.style.transition = 'opacity 0.8s ease';
+    document.body.style.opacity = '0';
+    setTimeout(() => {
+      // change to next page — update filename if needed
+      window.location.href = 'page4.html';
+    }, 800);
+  });
+
+  // small accessibility: allow Esc to close funfact
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape'){
+      if(panel.classList.contains('show')){
+        panel.classList.remove('show');
+        panel.setAttribute('aria-hidden', 'true');
+      }
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Constellation - Chapter 1</title>
+
+    <style>
+        body {
+            background-color: rgb(58, 46, 77);
+            text-align: center;
+            color: white;
+            font-family: Serif;
+            opacity: 0;
+            transition: opacity 1.2s ease; /* hiệu ứng fade-in */
+        }
+         h1, h2, .title {
+        font-family:  Arial;
+        }
+
+        .content-box {
+            margin-top: 120px;
+            padding: 30px 40px;
+            display: inline-block;
+            background: rgba(255, 214, 232, 0.08);
+            border: 1px solid rgba(255, 214, 232, 0.2);
+            border-radius: 18px;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 0 20px rgba(255, 182, 193, 0.15);
+            animation: glow 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 12px rgba(255, 195, 220, 0.1); }
+            to { box-shadow: 0 0 28px rgba(255, 195, 220, 0.35); }
+        }
+
+        .fade-text {
+            opacity: 0;
+            animation: fadeInText 2s forwards ease;
+        }
+
+        @keyframes fadeInText {
+            to { opacity: 1; }
+        }
+
+        button {
+            margin-top: 30px;
+            padding: 14px 32px;
+            font-size: 20px;
+            font-weight: 600;
+            background-color: #ffd6e8;
+            color: #6b4e71;
+            border: 2px solid #f7bde2;
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(255, 182, 193, 0.4);
+            transition: 0.25s ease;
+        }
+
+        button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(255,182,193,0.6);
+        }
+
+        img.planet {
+            width: 280px;
+            margin-top: 40px;
+            animation: float 3.5s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%   { transform: translateY(0px); }
+            50%  { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+
+<body onload="document.body.style.opacity='1'">
+
+    <div class="content-box">
+        <h2 class="fade-text" style="animation-delay: 0.3s">
+            Chào mừng đến với hành trình ánh sao...
+        </h2>
+
+        <p class="fade-text" style="animation-delay: 1s; font-size: 16px; margin-top: 20px;">
+            Nơi những vì sao sẽ kể cho bạn nghe câu chuyện của chính bạn.
+        </p>
+
+        <p class="fade-text" style="animation-delay: 1.8s; font-size: 15px; margin-top: 20px;">
+            Mỗi lựa chọn bạn đưa ra hôm nay... sẽ dẫn bạn tới một chòm sao định mệnh.
+        </p>
+
+        <button class="fade-text" style="animation-delay: 2.5s" onclick="nextPage()">
+            Tiếp tục
+        </button>
+    </div>
+
+    <img src="planet.png" class="planet fade-text" style="animation-delay: 3s">
+
+    <script>
+        function nextPage() {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                window.location = "page3.html"; // bạn có thể đổi thành trang tiếp theo
+            }, 1000);
+        }
+    </script>
+
+</body>
+<footer style="
+    position: fixed;
+    bottom: 12px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    font-family: Sanrif, sans-serif;
+    opacity: 0.7;
+">
+    © miuy3107
+</footer>
+
+</html>

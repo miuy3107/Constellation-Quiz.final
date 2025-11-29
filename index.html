@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html> 
+<head>
+    <title>Constellation</title>
+
+    <!-- Hiệu ứng fade-out -->
+    <style>
+        .fade-out {
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+    </style>
+</head>
+
+<audio autoplay loop>
+  <source src="mixkit-beautiful-dream-493.mp3" type="audio/mpeg">
+</audio>
+
+<body style="background-color: rgb(58, 46, 77); text-align: center">
+
+<h1 style="margin-top: 100px;font-family: Georgia; color: white"> Bạn là chòm sao nào?</h1>
+
+<img 
+  src="bg.png"
+  style="
+    display: block;
+    margin: 20px auto 0 auto;
+    width: 290px;
+    height: 350px;
+  "
+>
+
+<p style="margin-top: 20px; color: white; font-style: italic; font-size: 14px"> Sâu, sâu thẳm trong thiên hà,</p>
+<p style="margin-top: -10px; color: white; font-style: italic; font-size: 14px"> Có những câu chuyện dần bị lãng quên... </p>
+
+<button 
+  onclick="startGame()"
+  style="
+    display: block;
+    margin: 25px auto;
+    padding: 14px 32px;
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #ffd6e8;
+    color: #6b4e71;
+    border: 2px solid #f7bde2;
+    border-radius: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(255, 182, 193, 0.4);
+    transition: 0.25s ease;
+  "
+  onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 8px 16px rgba(255,182,193,0.6)';"
+  onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 10px rgba(255,182,193,0.4)';"
+>
+  Bắt Đầu
+</button>
+
+<img src="meteor.png" alt="" style="float: left; width: 150px; margin: 20px;">
+
+<!-- Script điều khiển fade-out rồi chuyển trang -->
+<script>
+function startGame() {
+    document.body.classList.add("fade-out");
+    setTimeout(() => {
+        window.location = "page2.html";   // Trang tiếp theo
+    }, 1000);  // 1 giây
+}
+</script>
+
+</body>
+<footer style="
+    position: fixed;
+    bottom: 12px;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    font-family: Sanrif, sans-serif;
+    opacity: 0.7;
+">
+    © miuy3107
+</footer>
+</html>
